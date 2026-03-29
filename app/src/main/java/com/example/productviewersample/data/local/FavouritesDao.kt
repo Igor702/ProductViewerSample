@@ -3,22 +3,21 @@ package com.example.productviewersample.data.local
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.productviewersample.model.Product
+import com.example.productviewersample.model.FavouriteEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavouritesDao {
 
     @Query("SELECT * FROM favourite_products")
-    fun getAllFavourites(): List<Product>
+    fun getAllFavourites(): Flow<List<FavouriteEntity>>
 
-    @Query("SELECT * FROM favourite_products WHERE id IN (:favouriteId)")
-    fun getFavouriteProductById(favouriteId: Int): Product
-
-    @Insert
-    fun addToFavourites(product: Product)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addToFavourites(vararg product: FavouriteEntity)
 
     @Delete
-    fun deleteFromFavourites(product: Product)
+    suspend fun deleteFromFavourites(product: FavouriteEntity)
 
 }

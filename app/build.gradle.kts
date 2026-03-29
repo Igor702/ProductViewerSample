@@ -20,7 +20,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.productviewersample.MyHiltTestRunner"
     }
 
     buildTypes {
@@ -55,6 +55,10 @@ dependencies {
     //di
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    kspAndroidTest(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
     //roomDB
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
@@ -67,4 +71,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    //google Truth
+    androidTestImplementation(libs.truth)
 }
