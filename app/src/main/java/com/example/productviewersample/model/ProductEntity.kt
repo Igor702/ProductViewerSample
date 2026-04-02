@@ -1,8 +1,5 @@
 package com.example.productviewersample.model
 
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
-
 data class ProductEntity(
     val id:Int,
     val title: String,
