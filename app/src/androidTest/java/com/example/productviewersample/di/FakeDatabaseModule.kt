@@ -1,35 +1,36 @@
 package com.example.productviewersample.di
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
-import com.example.productviewersample.TAG
 import com.example.productviewersample.data.local.FavouritesDB
 import com.example.productviewersample.data.local.FavouritesDao
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.testing.TestInstallIn
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
-object DatabaseModule {
+@TestInstallIn( components = [SingletonComponent::class],
+    replaces = [DatabaseModule::class])
+object FakeDatabaseModule {
 
     @Provides
     @Singleton
     fun provideFavouritesDb(@ApplicationContext context: Context): FavouritesDB{
-        return Room.databaseBuilder(
-            context,
-         FavouritesDB::class.java,
-          "favourite_products"
-        ).build()
+        return Room.inMemoryDatabaseBuilder(
+            context = context,
+            klass = FavouritesDB::class.java,
+        )
+            .allowMainThreadQueries()
+            .build()
+
     }
 
     @Provides
     @Singleton
-    fun provideFavouritesDao(database: FavouritesDB): FavouritesDao{
+    fun provideTestNotesDao(database: FavouritesDB): FavouritesDao{
         return database.favouritesDao()
     }
 }
