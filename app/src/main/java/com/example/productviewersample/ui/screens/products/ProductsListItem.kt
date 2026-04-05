@@ -38,12 +38,13 @@ import com.example.productviewersample.R
 @Composable
 fun ProductsListItem(
     modifier: Modifier = Modifier,
+    id: Int,
     title: String,
     price: Double,
     category: String,
     imageUrl: String,
     inFavourites: Boolean,
-    onFavouritesChange: () -> Unit,
+    onFavouritesChange: (Int) -> Unit,
     onNavigateToDetails: () -> Unit,
 ) {
 
@@ -52,7 +53,8 @@ fun ProductsListItem(
         color = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
             .clickable(
-                onClick = onNavigateToDetails)
+                onClick = onNavigateToDetails
+            )
     ) {
         Row(
             Modifier
@@ -82,12 +84,13 @@ fun ProductsListItem(
                     Modifier.heightIn(max = 100.dp),
                     title = title,
                     price = price,
-                    category = category)
+                    category = category
+                )
             }
 
             AddRemoveIcon(
                 inFavourites = inFavourites,
-                onFavouritesChange = onFavouritesChange
+                onFavouritesChange = { onFavouritesChange(id) }
             )
 
 
@@ -180,6 +183,7 @@ private fun ProductsListItemPreview() {
     MaterialTheme {
         Surface {
             ProductsListItem(
+                id = 1,
                 title = "DefaultPhone A5",
                 price = 1200.99,
                 category = "Flagman",
@@ -219,7 +223,8 @@ private fun KeyValueTextComponentPreview() {
             KeyValueTextComponent(
                 key = "Price",
                 value = NumberFormat
-                    .getCurrencyInstance().format(1200.99))
+                    .getCurrencyInstance().format(1200.99)
+            )
 
         }
     }
