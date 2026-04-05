@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ProductViewerSample</string>
+    <string name="category">"Category"</string>
+    <string name="price">Price</string>
+    <string name="about_this_product">About this product:</string>
+    <string name="add_the_product_to_favourites">Add the product to favourites</string>
+    <string name="remove_the_product_from_favourites">Remove the product from favourites</string>
 </resources>
