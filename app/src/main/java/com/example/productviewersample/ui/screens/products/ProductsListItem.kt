@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -59,7 +60,7 @@ fun ProductsListItem(
         Row(
             Modifier
                 .fillMaxWidth()
-                .height(100.dp)
+                .heightIn(min = 100.dp)
                 .padding(end = 8.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -81,7 +82,7 @@ fun ProductsListItem(
                 )
 
                 ProductTextDescription(
-                    Modifier.heightIn(max = 100.dp),
+                    Modifier.heightIn(min = 100.dp),
                     title = title,
                     price = price,
                     category = category
@@ -149,15 +150,14 @@ fun AddRemoveIcon(inFavourites: Boolean, onFavouritesChange: () -> Unit) {
     if (inFavourites) {
         Image(
             imageVector = Icons.Default.Favorite,
-            contentDescription =
-                stringResource(R.string.add_the_product_to_favourites),
+            contentDescription = stringResource(R.string.remove_the_product_from_favourites),
             Modifier.clickable(onClick = onFavouritesChange)
         )
     } else {
         Image(
             imageVector = Icons.Default.FavoriteBorder,
-            contentDescription =
-                stringResource(R.string.remove_the_product_from_favourites),
+            contentDescription = stringResource(R.string.add_the_product_to_favourites),
+
             Modifier.clickable(onClick = onFavouritesChange)
         )
     }
@@ -165,14 +165,16 @@ fun AddRemoveIcon(inFavourites: Boolean, onFavouritesChange: () -> Unit) {
 
 @Composable
 fun KeyValueTextComponent(
+    modifier: Modifier = Modifier,
     key: String,
     value: String,
-    style: TextStyle = LocalTextStyle.current
+    style: TextStyle = LocalTextStyle.current,
+    textAlign: TextAlign? = null,
 ) {
 
-    Row {
-        Text(text = "$key: ", style = style)
-        Text(text = value, style = style)
+    Row(modifier = modifier) {
+        Text(text = "$key: ", style = style, textAlign = textAlign)
+        Text(text = value, style = style, textAlign = textAlign)
     }
 
 }

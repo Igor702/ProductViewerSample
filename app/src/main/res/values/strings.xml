@@ -5,4 +5,9 @@
     <string name="about_this_product">About this product:</string>
     <string name="add_the_product_to_favourites">Add the product to favourites</string>
     <string name="remove_the_product_from_favourites">Remove the product from favourites</string>
+    <string name="products">Products</string>
+    <string name="loading">Loading...</string>
+    <string name="try_again">Try again</string>
+    <string name="error">Error</string>
+    <string name="oops_something_get_wrong">Oops, something get wrong</string>
 </resources>
